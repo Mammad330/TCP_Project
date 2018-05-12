@@ -20,9 +20,7 @@ while True:
                 try:
                     s.connect((ip, port))
                     try:
-                        buffer_size = s.recv(8)
-                        print(buffer_size)
-                        recv_message = s.recv(int(buffer_size))
+                        recv_message = s.recv(1024)
                         recv_message = decoding.decode_mes(recv_message)
                         recv_message = decription.decrption(recv_message)
                         print(recv_message)

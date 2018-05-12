@@ -15,10 +15,6 @@ def newkeys(keysize):
     return public, private
 
 
-def importKey(externKey):
-    return RSA.importKey(externKey)
-
-
 def getpublickey(priv_key):
     return priv_key.publickey()
 
@@ -58,7 +54,9 @@ private_read=generate_keys.read_key("private.pem")
 generate_keys.write_key("public.pem",public)
 public_read=generate_keys.read_key("public.pem")
 encrypted = b64encode(encrypt(msg1, public_read))
-decrypted = decrypt(b64decode(encrypted), private)
+
+decrypted = decrypt(b64decode(encrypted), private_read)
+
 print(encrypted)
 print(decrypted)
 print(public_read.exportKey("PEM"))
@@ -70,6 +68,6 @@ verify1 = verify(encrypted, b64decode(signature), public)
 # print(public.exportKey('PEM'))
 # print("Encrypted: " + str(encrypted))
 # print("Decrypted: '%s'" % decrypted)
-# print("Signature: " + str(signature))
+print("Signature: " + str(signature))
 print("Verify: %s" % verify1)
 # print(verify(msg2, b64decode(signature), public))

@@ -21,14 +21,12 @@ def act_as_server(server_ssid, server_psk, server_port, file_path):
         message = read_file(message_path)
         message = encryption.rc4(message)
         message = encoding.encode_mes(message)
-        buffer_size = len(message)
-        print(buffer_size)
+
     except FileNotFoundError:
         print("File not found")
     while True:
         c, addr = s.accept()
         print('Got connection from', addr)
-        c.send(str(buffer_size).encode())
         c.send(message)
         c.close()
 
