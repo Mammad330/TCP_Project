@@ -1,7 +1,5 @@
 import socket
 from File_operations import read_file
-import encoding
-import encryption
 from network import get_my_ip, create_server_wifi
 
 
@@ -31,4 +29,4 @@ def act_as_server(server_ssid, server_psk, server_port, file_path):
         c.close()
 
 if __name__ =="__main__":
-    act_as_server("testserverm","testserverm",80,"Message")
+    act_as_server("testserverm","testserverm",80,"Message.txt")

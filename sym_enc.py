@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from Crypto.Cipher import ARC4
+import base64
 
 
 def encyrption(msg):
@@ -17,3 +18,13 @@ def decrption(msg):
     # msg = msg.encode('utf8')
     cipher = enc.decrypt(msg)
     return cipher.decode()
+
+
+def encode_mes(message):
+    encoded_mes = base64.b64encode(message)
+    return encoded_mes
+
+
+def decode_mes(message):
+    decoded_mes = base64.b64decode(message)
+    return decoded_mes

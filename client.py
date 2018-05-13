@@ -1,6 +1,6 @@
 import socket
 import decoding
-import decription
+import sym_enc
 from network import get_my_ip, scanning_ip_exceptme, find_ssids, connect_wifi
 from File_operations import write_file,read_file,write_file_append
 
@@ -30,7 +30,7 @@ while True:
                                 write_file_append(file_path_wr, recv_message)
                             recv_message=read_file(file_path_wr)
                             recv_message = decoding.decode_mes(recv_message)
-                            recv_message = decription.decrption(recv_message)
+                            recv_message = sym_enc.decrption(recv_message)
                             write_file("Reabable.txt",recv_message)
                             s.close()
                             # act_as_server(server_ssid, server_passcode, port, file_path_wr)
