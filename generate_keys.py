@@ -1,17 +1,5 @@
 from Crypto.PublicKey import RSA
 
-
-# private_key = RSA.generate(1024)
-# public_key = private_key.publickey()
-# print(private_key.exportKey(format='PEM'))
-# print(public_key.exportKey(format='PEM'))
-
-# with open ("private.pem", "w") as prv_file:
-#     print("{}".format(private_key.exportKey()), file=prv_file)
-#
-# with open ("public.pem", "w") as pub_file:
-#     print("{}".format(public_key.exportKey()), file=pub_file)
-
 def write_key(path, key):
     with open(path, "wb") as file:
         file.write(key.exportKey(format="PEM"))
@@ -19,9 +7,7 @@ def write_key(path, key):
 
 def read_key(path):
     with open(path, "rb") as file:
-        pem = file.read()
-        pem1=RSA.importKey(pem)
-    return pem1
+        key = file.read()
+        key_st=RSA.importKey(key)
+    return key_st
 
-# with open ("public.pem", "wb") as pub_file:
-#     print("{}".format(public_key.exportKey()), file=pub_file)

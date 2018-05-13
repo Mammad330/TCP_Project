@@ -5,7 +5,9 @@ from Crypto.Hash import SHA256
 # from Crypto.Hash import SHA512, SHA384, SHA256, SHA, MD5
 from Crypto import Random
 from base64 import b64encode, b64decode
-import generate_keys
+
+from decription import encyrption, decrption
+from decoding import decode_mes, encode_mes
 
 
 def newkeys(keysize):
@@ -45,24 +47,40 @@ def verify(message, signature, pub_key):
     return signer.verify(digest, signature)
 
 
+def write_key(path, key):
+    with open(path, "wb") as file:
+        file.write(key.exportKey(format="PEM"))
+
+
+def read_key(path):
+    with open(path, "rb") as file:
+        key = file.read()
+        key_st = RSA.importKey(key)
+    return key_st
+
+
 msg1 = b"Hello Tony, I am Jarvis!"
-msg2 = b"Hello Toni, I am Jarvis!"
 keysize = 2048
 (public, private) = newkeys(keysize)
-generate_keys.write_key("private.pem",private)
-private_read=generate_keys.read_key("private.pem")
-generate_keys.write_key("public.pem",public)
-public_read=generate_keys.read_key("public.pem")
-encrypted = b64encode(encrypt(msg1, public_read))
+write_key("private.pem", private)
+private_read = read_key("private.pem")
+write_key("public.pem", public)
+public_read = read_key("public.pem")
 
-decrypted = decrypt(b64decode(encrypted), private_read)
+encrypted = encyrption(msg1)
+encoded_encrypted = encode_mes(encrypted)
+decoded = decode_mes(encoded_encrypted)
+decrypted = decrption(decoded)
+# encrypted = b64encode(encrypt(msg1, public_read))
 
-print(encrypted)
-print(decrypted)
-print(public_read.exportKey("PEM"))
-print(private_read.exportKey("PEM"))
-signature = b64encode(sign(encrypted, private))
-verify1 = verify(encrypted, b64decode(signature), public)
+# decrypted = decrypt(b64decode(encrypted), private_read)
+
+print(encoded_encrypted)
+print(decrypted.encode())
+# print(public_read.exportKey("PEM"))
+# print(private_read.exportKey("PEM"))
+signature = b64encode(sign(encoded_encrypted, private_read))
+verify1 = verify(encoded_encrypted, b64decode(signature), public_read)
 
 # print(private.exportKey('PEM'))
 # print(public.exportKey('PEM'))

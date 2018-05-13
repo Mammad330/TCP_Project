@@ -30,4 +30,5 @@ def act_as_server(server_ssid, server_psk, server_port, file_path):
         c.send(message)
         c.close()
 
-# act_as_server("testserver","testserver",80,"Message")
+if __name__ =="__main__":
+    act_as_server("testserverm","testserverm",80,"Message")

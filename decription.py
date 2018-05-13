@@ -3,17 +3,17 @@
 from Crypto.Cipher import ARC4
 
 
-def encyrption(msg1):
+def encyrption(msg):
     key = 'MyNameIsMammad'
     enc = ARC4.new(key)
     # msg = msg.encode('utf8')
-    cipher = enc.encrypt(msg1)
+    cipher = enc.encrypt(msg)
     return cipher
 
 
-def decrption(msg2):
+def decrption(msg):
     key = 'MyNameIsMammad'
     enc = ARC4.new(key)
     # msg = msg.encode('utf8')
-    cipher = enc.decrypt(msg2)
-    return cipher.decode("ascii")
+    cipher = enc.decrypt(msg)
+    return cipher.decode()
