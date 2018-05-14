@@ -9,11 +9,12 @@ class Message_send:
     process_type = None
     command = None
 
-    def __init__(self, command_list):
-        self.file_type = str(command_list[0])
-        self.client_type = str(command_list[1])
-        self.process_type = str(command_list[2])
-        self.command = "".join(command_list)
+    def __init__(self, command):
+
+        self.file_type = command[:1]
+        self.client_type = command[1:2]
+        self.process_type = command[2:]
+        self.command = command
 
     def file_select_read(self, file_type):
         if file_type == "0":
@@ -25,15 +26,15 @@ class Message_send:
         public_key = read_key("public.pem")
         private_key = read_key("private.pem")
         if (client_type == "0"):  # Citizen message preparation
-            ready_msg_ctz = encode_mes(encyrption(plain_message))
-            signature_ctz = encode_mes(sign(ready_msg_ctz, private_key))
-            return signature_ctz, ready_msg_ctz
-        if (client_type == "1"):  # Ploce message preparation
-            ready_msg_plc = encode_mes(encrypt_asym(plain_message, public_key))
-            signiture_plc = encode_mes(sign(ready_msg_plc, private_key))
-            return signiture_plc, ready_msg_plc
+            send_msg_ctz = encode_mes(encyrption(plain_message))
+            signature_ctz = encode_mes(sign(send_msg_ctz, private_key))
+            return signature_ctz, send_msg_ctz
+        if (client_type == "1"):  # Police message preparation
+            send_msg_plc = encode_mes(encrypt_asym(plain_message, public_key))
+            signiture_plc = encode_mes(sign(send_msg_plc, private_key))
+            return signiture_plc, send_msg_plc
         if (client_type == "2"): pass
 
-    def prepare_command(self, command):
-        command2send = encode_mes(command)
+    def prepare_command(self):
+        command2send = encode_mes(self.command)
         return command2send

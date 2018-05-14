@@ -9,8 +9,8 @@ def read_file(path):
         file_list = fo.read()
         fo.close()
         return file_list
-    except FileNotFoundError:
-        print("No such a file")
+    except Exception as e:
+        print("Read file error: "+str(e))
 
 
 def write_file_append(path, message):
@@ -20,8 +20,9 @@ def write_file_append(path, message):
         fo = open(abs_file_path, "ab+")
         fo.write(message)
         fo.close()
-    except FileNotFoundError:
-        print("No such a file")
+    except Exception as e:
+        print("Write file error: "+str(e))
+
 
 def write_file(path, message):
     try:
@@ -34,12 +35,18 @@ def write_file(path, message):
         print("No such a file")
 
 def write_key(path, key):
-    with open(path, "wb") as file:
-        file.write(key.exportKey(format="PEM"))
+    try:
+        with open(path, "wb") as file:
+            file.write(key.exportKey(format="PEM"))
+    except Exception as e:
+        print("Writing key error: "+str(e))
 
 
 def read_key(path):
-    with open(path, "rb") as file:
-        key = file.read()
-        key_st=RSA.importKey(key)
-    return key_st
+    try:
+        with open(path, "rb") as file:
+            key = file.read()
+            key_st=RSA.importKey(key)
+        return key_st
+    except Exception as e:
+        print("Reading key error:"+str(e))
