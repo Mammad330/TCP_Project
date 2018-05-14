@@ -3,6 +3,7 @@ from File_operations import read_file
 from network import get_my_ip, create_server_wifi
 from Message_send import Message_send
 
+
 def act_as_server(server_ssid, server_psk, server_port, command):
     create_server_wifi(server_ssid, server_psk)
     print('server created')
@@ -14,8 +15,9 @@ def act_as_server(server_ssid, server_psk, server_port, command):
     s.listen(5)
     print("socket is listening")
     obj_send = Message_send(command)
-    signature , msg2send = obj_send.client_select_msg(obj_send.client_type,obj_send.file_select_read(obj_send.file_type))
-    commmand2send= obj_send.prepare_command(command)
+    signature, msg2send = obj_send.client_select_msg(obj_send.client_type,
+                                                     obj_send.file_select_read(obj_send.file_type))
+    commmand2send = obj_send.prepare_command(command)
 
     while True:
         c, addr = s.accept()

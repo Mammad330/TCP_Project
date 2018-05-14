@@ -1,6 +1,6 @@
 import socket
 from network import get_my_ip, scanning_ip_exceptme, find_ssids, connect_wifi
-from File_operations import write_file,read_file,write_file_append
+from File_operations import write_file, read_file, write_file_append
 from Message_recieve import Message_recieve
 from server import act_as_server
 
@@ -11,7 +11,7 @@ port = 80
 buffer_size = 1024
 file_brd_msg_wr = "Message_recv.txt"
 file_sign_wr = "Signature.txt"
-file_readable = "Readable.txt" #in case, you are final reciever
+file_readable = "Readable.txt"  # in case, you are final reciever
 server_ssid = "Server1"
 server_passcode = "Server1"
 while True:
@@ -25,7 +25,7 @@ while True:
                 for ip in list_network_ips:
                     try:
                         s.connect((ip, port))
-                        print("Connected"+str(ip)+" "+str(port))
+                        print("Connected" + str(ip) + " " + str(port))
                         try:
                             recv_command = s.recv(buffer_size)
                             while True:
@@ -40,8 +40,8 @@ while True:
                             recv_message = read_file(file_brd_msg_wr)
 
                             obj_recv = Message_recieve(recv_command)
-                            if (obj_recv.client_detect_action(recv_sign,recv_message,file_readable))==True:
-                                #path needed---in case, you are final reciever
+                            if (obj_recv.client_detect_action(recv_sign, recv_message, file_readable)) == True:
+                                # path needed---in case, you are final reciever
                                 s.close()
                                 act_as_server(server_ssid, server_passcode, port, obj_recv.command)
                             s.close()

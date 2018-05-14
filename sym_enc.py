@@ -12,7 +12,7 @@ def encyrption(msg):
         cipher = enc.encrypt(msg)
         return cipher
     except Exception as e:
-        print("Symmetric encryption error:  "+str(e))
+        print("Symmetric encryption error:  " + str(e))
 
 
 def decrption(msg):
@@ -23,7 +23,7 @@ def decrption(msg):
         cipher = enc.decrypt(msg)
         return cipher.decode()
     except Exception as e:
-        print("Symmetric decription error: "+str(e))
+        print("Symmetric decription error: " + str(e))
 
 
 def encode_mes(message):
@@ -31,7 +31,7 @@ def encode_mes(message):
         encoded_mes = base64.b64encode(message)
         return encoded_mes
     except Exception as e:
-        print("Encoding error:"+str(e))
+        print("Encoding error:" + str(e))
 
 
 def decode_mes(message):
@@ -39,4 +39,4 @@ def decode_mes(message):
         decoded_mes = base64.b64decode(message)
         return decoded_mes
     except Exception as e:
-        print("Decoding error:"+str(e))
+        print("Decoding error:" + str(e))

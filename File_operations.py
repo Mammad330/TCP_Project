@@ -1,6 +1,7 @@
 import os
 from Crypto.PublicKey import RSA
 
+
 def read_file(path):
     try:
         script_dir = os.path.dirname(__file__)
@@ -10,7 +11,7 @@ def read_file(path):
         fo.close()
         return file_list
     except Exception as e:
-        print("Read file error: "+str(e))
+        print("Read file error: " + str(e))
 
 
 def write_file_append(path, message):
@@ -21,7 +22,7 @@ def write_file_append(path, message):
         fo.write(message)
         fo.close()
     except Exception as e:
-        print("Write file error: "+str(e))
+        print("Write file error: " + str(e))
 
 
 def write_file(path, message):
@@ -34,19 +35,20 @@ def write_file(path, message):
     except FileNotFoundError:
         print("No such a file")
 
+
 def write_key(path, key):
     try:
         with open(path, "wb") as file:
             file.write(key.exportKey(format="PEM"))
     except Exception as e:
-        print("Writing key error: "+str(e))
+        print("Writing key error: " + str(e))
 
 
 def read_key(path):
     try:
         with open(path, "rb") as file:
             key = file.read()
-            key_st=RSA.importKey(key)
+            key_st = RSA.importKey(key)
         return key_st
     except Exception as e:
-        print("Reading key error:"+str(e))
+        print("Reading key error:" + str(e))
