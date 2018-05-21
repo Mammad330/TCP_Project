@@ -4,7 +4,7 @@ from Message_send import Message_send
 
 
 def act_as_server(server_ssid, server_psk, server_port, command):
-    # create_server_wifi(server_ssid, server_psk)
+    create_server_wifi(server_ssid, server_psk)
 
     print('Server created with ssid ' + str(server_ssid) + " with password " + str(server_psk))
     my_ip = get_my_ip()
@@ -34,14 +34,12 @@ def act_as_server(server_ssid, server_psk, server_port, command):
             print(signature)
         sign_flag = c.recv(32)
         print("Confirmation from slave: " + str(sign_flag))
-        if sign_flag == b'Sign recieved':
-            print("Encrypted message sending...")
-            c.send(msg2send)
-            print(msg2send)
-        msg_flag = c.recv(32)
-        if msg_flag == b'Message recieved':
-            print("Message succesfully sent to slave")
-            print("End Of Communication\n")
+        # if sign_flag == b'Sign recieved':
+        print("Encrypted message sending...")
+        c.send(msg2send)
+        print(msg2send)
+        print("Message succesfully sent to slave")
+        print("End Of Communication\n")
         c.close()
 
 

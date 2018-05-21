@@ -18,8 +18,12 @@ class Message_send:
 
     def file_select_read(self, file_type):
         if file_type == "0":
-            message = read_file("Message.txt")
-            return message
+            if self.client_type == "0":  # Citizen message
+                message = read_file("Message.txt")
+                return message
+            if self.client_type == "1":  # Police Message
+                message = read_file("Message_police.txt")
+                return message
         if file_type == "1": pass
 
     def client_select_msg(self, client_type, plain_message):
@@ -35,7 +39,13 @@ class Message_send:
             return signiture_plc, send_msg_plc
         if (client_type == "2"): pass
 
-    def prepare_command(self,command):
+    def process_select(self, process_type):
+        if (process_type == "0"):  # broadcast
+            return True
+        if (process_type == "1"):  # I am reciever
+            return False
+
+    def prepare_command(self, command):
         command2send = encode_mes(command)
         return command2send
 
