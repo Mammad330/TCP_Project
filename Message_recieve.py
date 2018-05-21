@@ -10,7 +10,7 @@ class Message_recieve:
     command = None
 
     def __init__(self, command):
-        command = decode_mes(command)
+        command = command.decode("ascii")
         self.file_type = command[:1]
         self.client_type = command[1:2]
         self.process_type = command[2:]
@@ -27,9 +27,11 @@ class Message_recieve:
         if (client_type == "0"):  # Citizen message preparation
             if verify(recv_msg, decode_mes(signature), public_key):  # True if it comes from master's sign
                 if (self.process_select(self.process_type)) == False:  # I am final reciever
+                    print("I am final reciever")
                     write_file(path_readable_txt, decrption(decode_mes(recv_msg)))
                     return False
                 if (self.process_select(self.process_type)) == True:  # I need to broadcast
+                    print("I will broadcast message")
                     return True
 
         if (client_type == "1"):  # Police message preparation

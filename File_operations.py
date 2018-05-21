@@ -7,9 +7,9 @@ def read_file(path):
         script_dir = os.path.dirname(__file__)
         abs_file_path = os.path.join(script_dir, path)
         fo = open(abs_file_path, "r")
-        file_list = fo.read()
+        file_content = fo.read()
         fo.close()
-        return file_list
+        return file_content.encode()
     except Exception as e:
         print("Read file error: " + str(e))
 
@@ -18,8 +18,8 @@ def write_file_append(path, message):
     try:
         script_dir = os.path.dirname(__file__)
         abs_file_path = os.path.join(script_dir, path)
-        fo = open(abs_file_path, "ab+")
-        fo.write(message)
+        fo = open(abs_file_path, "a+")
+        fo.write(message.decode("ascii"))
         fo.close()
     except Exception as e:
         print("Write file error: " + str(e))

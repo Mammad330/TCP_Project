@@ -19,7 +19,7 @@ class Message_send:
     def file_select_read(self, file_type):
         if file_type == "0":
             message = read_file("Message.txt")
-            return message.encode()
+            return message
         if file_type == "1": pass
 
     def client_select_msg(self, client_type, plain_message):
@@ -35,6 +35,9 @@ class Message_send:
             return signiture_plc, send_msg_plc
         if (client_type == "2"): pass
 
-    def prepare_command(self):
-        command2send = encode_mes(self.command)
+    def prepare_command(self,command):
+        command2send = encode_mes(command)
         return command2send
+
+    def next_power_of_2(x):
+        return 1 if x == 0 else 2 ** (x - 1).bit_length()
